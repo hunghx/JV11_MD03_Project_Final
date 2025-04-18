@@ -65,10 +65,11 @@ public class CategoryController {
     }
 
     @PostMapping("/update")
-    public String doUpdate(@Valid @ModelAttribute("category")CategoryUpdate request,
-            @RequestParam("categoryId") Long id, BindingResult result, Model model){
+    public String doUpdate(@Valid @ModelAttribute("category") CategoryUpdate request, BindingResult result,
+            @RequestParam("categoryId") Long id, Model model){
         if (result.hasErrors()){
             model.addAttribute("category", request);
+            model.addAttribute("id", id);
             return "category/edit";
         }
         categoryService.update(request, id);
